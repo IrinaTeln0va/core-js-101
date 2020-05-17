@@ -32,7 +32,9 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-  throw new Error('Not implemented');
+  const reg = /^{[\dA-Fa-f]{8}-[\dA-Fa-f]{4}-[\dA-Fa-f]{4}-[\dA-Fa-f]{4}-[\dA-Fa-f]{12}}$/;
+  // console.log(reg.match('{21EC2020-3AEA-4069-A2DD-08002B30309D}'));
+  return reg;
 }
 
 
@@ -54,7 +56,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-  throw new Error('Not implemented');
+  return /.*(p.t).*/;
 }
 
 
@@ -78,8 +80,10 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
+function getPasswordValidator(minLength) {
+  const first = '(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z ]{';
+  const second = ',}';
+  return new RegExp(`^${first}${minLength}${second}$`);
 }
 
 
