@@ -28,8 +28,16 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  return new Promise((resolve, reject) => {
+    if (isPositiveAnswer === true) {
+      resolve('Hooray!!! She said "Yes"!');
+    } else if (isPositiveAnswer === false) {
+      resolve('Oh no, she said "No".');
+    }
+    const error = new Error('Wrong parameter is passed! Ask her again.');
+    reject(error);
+  });
 }
 
 
@@ -48,8 +56,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return Promise.all(array);
 }
 
 /**
@@ -71,8 +79,8 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
@@ -94,6 +102,43 @@ function getFastestPromise(/* array */) {
  */
 function chainPromises(/* array, action */) {
   throw new Error('Not implemented');
+  // if (!Promise.allSettled) {
+  //   Promise.allSettled = function allSet(promises) {
+  //     return Promise.all(promises.map((p) => Promise.resolve(p).then((value) => ({
+  //       state: 'fulfilled',
+  //       value,
+  //     }), (error) => ({
+  //       state: 'rejected',
+  //       reason: error,
+  //     }))));
+  //   };
+  // }
+  // Promise.allSettled(array)
+  //   .then((responses) => {
+  //     responses.reduce((acc, item) => {
+  //       let res;
+  //       if (item.status === 'fulfilled') {
+  //         res = action(acc, item.value);
+  //       } else {
+  //         res = acc;
+  //       }
+  //       return res;
+  //     });
+  //   });
+
+  // const resArray = [];
+  // const accPromise = array[0];
+
+  // array.forEach((promise) => {
+  //   accPromise.then((prev) => {
+  //     return promise.then((next) => {
+  //       return action(prev, next);
+  //     });
+  //   })
+  //   prom
+  //     .then((res) => resArray.push(res))
+  //     .catch(() => resArray.push(false));
+  // });
 }
 
 module.exports = {
